@@ -19,6 +19,10 @@
     color: white;
 }
 
+.hidden {
+    display: none;
+}
+
 body {
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
