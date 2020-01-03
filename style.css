@@ -57,6 +57,10 @@ main {
     color: var(--slate);
 }
 
+.content h2 {
+    font-weight: 300;
+}
+
 .content a {
     color: var(--gray-5);
     text-decoration: none;
