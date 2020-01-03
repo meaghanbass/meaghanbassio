@@ -1,0 +1,150 @@
+@import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+:root {
+    --purple-dark: #745fb5;
+    --purple-medium: #9066b8;
+    --purple-light: #a6b0f9;
+    --green: #77dab2;
+    --gray-1: #f1f3f5;
+    --gray-2: #ddd;
+    --gray-3: #aaa;
+    --gray-4: #50505a;
+    --gray-5: #222;
+    --slate: #345;
+}
+
+::selection {
+    background: var(--purple-light);
+    color: white;
+}
+
+body {
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--gray-1);
+    font-family: source sans pro, proxima nova, sans-serif;
+    color: var(--gray-4);
+    line-height: 1.6;
+    margin: 0;
+    font-size: 19px;
+}
+
+button {
+    background: linear-gradient(5deg, var(--purple-dark), var(--purple-medium));
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    border: none;
+    position: fixed;
+    top: 90px;
+    right: 90px;
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin: 90px;
+    max-width: 22em;
+    font-weight: 300;
+    color: var(--slate);
+}
+
+.content a {
+    color: var(--gray-5);
+    text-decoration: none;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.content.projects p {
+    margin: 10px 0;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+ul li span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background:var(--purple-dark);
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.links {
+    margin-top: 60px;
+    margin-left: -13px;
+}
+
+.links a {
+    border: 0;
+    margin-right: 20px;
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    font-size: 32px;
+    text-align: center;
+}
+
+.links i {
+    color: var(--gray-3);
+    transform: scale(0.7);
+    transition: transform 250ms ease, color 250ms linear;
+}
+
+.links i:hover {
+    transform: scale(1);
+}
+
+.links img {
+    width: 36px;
+    transform: scale(0.9);
+    transition: transform 250ms ease, color 250ms linear;
+}
+
+.links img:hover {
+    transform: scale(1.3);
+}
+
+.signature {
+    color: var(--gray-2);
+    margin-top: 0.5em;
+    margin-left: -30px;
+    font-size: 1.5em;
+}
+
+.category h3 {
+    color: var(--purple-dark);
+    font-weight: 400;
+    font-size: 22px;
+    
+}
+
+.category ul li span {
+    background: var(--gray-3);
+}
+
+@media screen and (max-width: 550px) {
+    button {
+        top: 30px;
+        right: 30px;
+    }
+
+    .content {
+        margin: 40px;
+    }
+
+    .links, .signature {
+        text-align: center;
+    }
+}
