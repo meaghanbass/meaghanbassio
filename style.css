@@ -65,10 +65,14 @@ main {
     font-weight: 300;
 }
 
-.content a {
+.content .underline {
     color: var(--gray-5);
     text-decoration: none;
     border-bottom: 1px solid #d4d4d4;
+}
+
+.content img {
+    margin-bottom: -20px;
 }
 
 .content.projects p {
