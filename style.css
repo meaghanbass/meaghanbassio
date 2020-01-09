@@ -166,6 +166,27 @@ ul li span {
     background: var(--gray-3);
 }
 
+/* ANIMATION */
+.animated-icon {
+    -webkit-animation-name: pointing; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1.5s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+    animation-name: pointing;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+@-webkit-keyframes pointing {
+    0%      {left:0px;}
+    50%     {left:20px;}
+    100%    {left:0px;}
+}
+/* Standard syntax */
+@keyframes pointing {
+    0%      {left:0px;}
+    50%     {left:20px;}
+    100%    {left:0px;}
+}
+
 @media screen and (max-width: 550px) {
     button {
         top: 30px;
