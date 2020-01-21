@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Russian Map</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- partial:index.partial.html -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/maps.js"></script>
+
+<script src="https://www.amcharts.com/lib/4/geodata/russiaHigh.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/finlandLow.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/estoniaLow.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/latviaLow.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/belarusLow.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/ukraineLow.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/georgiaLow.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/azerbaijanLow.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/turkeyLow.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/kazakhstanLow.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/mongoliaLow.js"></script>
+<script src="https://www.amcharts.com/lib/4/geodata/chinaHigh.js"></script>
+
+<!-- <script src="regions/russiaHigh.js"></script> -->
+
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+<div id="chartdiv"></div>
+
+<div class="toggles" id="box">
+
+    <!-- <i class="fas fa-grip-vertical"></i> -->
+    <img src="https://image.flaticon.com/icons/svg/149/149021.svg">
+
+    <center><h3 class="noselect">Map Layers</h3></center>
+
+    <ul>
+        <li>
+            <a class="expand">
+                <div class="right-arrow">+</div>
+                <div><p>Cities</p></div>
+            </a>
+            <div class="detail">
+                <!-- <span><input class="toggle-checkbox" type="checkbox" id="cities" value="Toggle Cities" onclick="toggleCities();" checked="true">Cities</span> -->
+                <span><input class="toggle-checkbox" type="checkbox" id="cities" value="Toggle Cities" onclick="toggle8cCities();" checked="true">8th Century</span>
+                <span><input class="toggle-checkbox" type="checkbox" id="cities" value="Toggle Cities" onclick="toggle9cCities();" checked="true">9th Century</span>
+                <span><input class="toggle-checkbox" type="checkbox" id="cities" value="Toggle Cities" onclick="toggle10cCities();" checked="true">10th Century</span>
+            </div>
+        </li>
+        <li>
+            <a class="expand">
+                <div class="right-arrow">+</div>
+                <div><p>Countries</p></div>
+            </a>
+            <div class="detail">
+                <span><input class="toggle-checkbox" type="checkbox" value="Toggle Azerbaijan" onclick="toggleAzerbaijan();" checked="true">Azerbaijan</span>
+                <span><input class="toggle-checkbox" type="checkbox" value="Toggle Belarus" onclick="toggleBelarus();" checked="true">Belarus</span>
+                <span><input class="toggle-checkbox" type="checkbox" value="Toggle China" onclick="toggleChina();" checked="true">China</span>
+                <span><input class="toggle-checkbox" type="checkbox" value="Toggle Estonia" onclick="toggleEstonia();" checked="true">Estonia</span>
+                <span><input class="toggle-checkbox" type="checkbox" value="Toggle Finland" onclick="toggleFinland();" checked="true">Finland</span>
+                <span><input class="toggle-checkbox" type="checkbox" value="Toggle Georgia" onclick="toggleGeorgia();" checked="true">Georgia</span>
+                <span><input class="toggle-checkbox" type="checkbox" value="Toggle Kazakhstan" onclick="toggleKazakhstan();" checked="true">Kazakhstan</span>
+                <span><input class="toggle-checkbox" type="checkbox" value="Toggle Latvia" onclick="toggleLatvia();" checked="true">Latvia</span>
+                <span><input class="toggle-checkbox" type="checkbox" value="Toggle Mongolia" onclick="toggleMongolia();" checked="true">Mongolia</span>
+                <span><input class="toggle-checkbox" type="checkbox" value="Toggle Turkey" onclick="toggleTurkey();" checked="true">Turkey</span>
+                <span><input class="toggle-checkbox" type="checkbox" value="Toggle Ukraine" onclick="toggleUkraine();" checked="true">Ukraine</span>
+            </div>
+        </li>
+        <li>
+            <a class="expand">
+                <div class="right-arrow">+</div>
+                <div><p>Terrain</p></div>
+            </a>
+            <div class="detail">
+                <span><input class="toggle-checkbox" type="checkbox" id="mountains" value="Toggle Mountains" onclick="toggleMountains();" checked="true">Mountains</span>
+                <span><input class="toggle-checkbox" type="checkbox" id="lakes" value="Toggle Lakes" onclick="toggleLakes();" checked="true">Lakes</span>
+                <span><input class="toggle-checkbox" type="checkbox" id="rivers" value="Toggle Rivers" onclick="toggleRivers();" checked="true">Rivers</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- SET DISPLAY BOX HEIGHT -->
+<script>
+    // set the box height here
+    var boxHeight = "200px";
+
+    var obj = document.getElementById("box");
+    obj.style.height = (boxHeight);
+
+    // console.log(obj.style.height);
+</script>
+
+
+<!-- This controls the DISPLAY BOX for toggling map layers -->
+<script>
+$(function() {
+    $(".expand").on( "click", function() {
+        $(this).next().slideToggle(200);
+        $expand = $(this).find(">:first-child");
+        
+        if($expand.text() == "+") {
+        $expand.text("-");
+        } else {
+        $expand.text("+");
+        }
+    });
+});
+</script>
+
+<!-- This controls the ability to MOVE THE BOX around the page -->
+<script>
+    var mousePosition;
+    var offset = [0,0];
+    var div;
+    var isDown = false;
+    
+    div = document.getElementById("box");
+    
+    document.body.appendChild(div);
+    
+    div.addEventListener('mousedown', function(e) {
+        isDown = true;
+        offset = [
+            div.offsetLeft - e.clientX,
+            div.offsetTop - e.clientY
+        ];
+    }, true);
+    
+    document.addEventListener('mouseup', function() {
+        isDown = false;
+    }, true);
+    
+    document.addEventListener('mousemove', function(event) {
+        event.preventDefault();
+        if (isDown) {
+            mousePosition = {
+                x : event.clientX,
+                y : event.clientY
+            };
+            div.style.left = (mousePosition.x + offset[0]) + 'px';
+            div.style.top  = (mousePosition.y + offset[1]) + 'px';
+        }
+    }, true);
+</script>
+
+<!-- partial -->
+    <script  src="./script.js"></script>
+
+    <script src="countries/russia.js"></script>
+    <script src="countries/finland.js"></script>
+    <script src="countries/estonia.js"></script>
+    <script src="countries/latvia.js"></script>
+    <script src="countries/belarus.js"></script>
+    <script src="countries/ukraine.js"></script>
+    <script src="countries/georgia.js"></script>
+    <script src="countries/azerbaijan.js"></script>
+    <script src="countries/turkey.js"></script>
+    <script src="countries/kazakhstan.js"></script>
+    <script src="countries/mongolia.js"></script>
+    <script src="countries/china.js"></script>
+
+    <!-- <script src="lakes/lakes.js"></script> -->
+    <script src="lakes/lake-ladoga.js"></script>
+    <script src="lakes/lake-onega.js"></script>
+    <script src="lakes/rybinsk-reservoir.js"></script>
+    <script src="lakes/lake-peipus.js"></script>
+    <script src="lakes/lake-baikal.js"></script>
+
+    <script src="rivers/river-volga.js"></script>
+    
+    <script src="mountains/mountains-urals.js"></script>
+    
+    <script src="cities.js"></script>
+
+</body>
+</html>
